@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function getCities() {
+            var country = document.getElementById('country').value;
+            var cities = document.getElementById('city');
+            cities.options.length = 0;
+            switch (country) {
+                case 'Ernakulam':
+                    cities.options.add(new Option('Aluva', 'Aluva'));
+                    cities.options.add(new Option('Edapally', 'Edapally'));
+
+                    break;
+
+                case 'Idukki':
+                    cities.options.add(new Option('Adimaly', ' Adimaly'));
+                    cities.options.add(new Option('Kattappana', 'Kattappana'));
+
+                    break;
+
+                case 'Kottayam':
+                    cities.options.add(new Option('Kanjirapally', 'Kanjirapally'));
+                    cities.options.add(new Option('Pala', 'Pala'));
+
+                    break;
+                case 'Pathanamthitta':
+                    cities.options.add(new Option('Adoor', ' Adoor'));
+                    cities.options.add(new Option('Ranni', 'Ranni'));
+
+                    break;
+
+                case 'Thiruvananthapuram':
+                    cities.options.add(new Option('Kanakakkunnu', 'Kanakakkunnu'));
+                    cities.options.add(new Option('Kilimanoor', 'Kilimanoor'));
+
+                    break;
+
+
+
+
+
+
+                default:
+                    break;
+            }
+        }
+    </script>
+<!--
+    <-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Form page</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'styles/css/main.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Fill this Form</h2>
+                    <form  action="{% url 'formapp:odercom' %}" method="POST" >
+                        {% csrf_token %}
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label  class="label">first name</label>
+                                    <input class="input--style-4" type="text" name="first_name">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">last name</label>
+                                    <input class="input--style-4" type="text" name="last_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Birthday</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Age</label>
+                                    <input class="input--style-4" type="number" name="age">
+                                </div>
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <label class="label">Gender</label>
+                                    <div class="p-t-10">
+                                        <label class="radio-container m-r-45">Male
+                                            <input type="radio" checked="checked" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container m-r-45">Female
+                                            <input type="radio" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">Others
+                                            <input type="radio" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" type="email" name="email">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Phone Number</label>
+                                    <input class="input--style-4" type="number" name="phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                        <label class="label">Address:</label><br>
+                        <textarea class="input--style-4" id="address" name="address" rows="4" cols="20"></textarea><br>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="label" for="country">District:</label>
+                            <div class="rs-select2 js-select-simple select&#45;&#45;no-search">
+                            <select  id="country" onchange="getCities()">
+                        <option  value="">Select Dist </option>
+                        <option  value="Ernakulam">Ernakulam</option>
+                        <option value="Idukki">Idukki</option>
+                         <option value="Kottayam">Kottayam</option>
+                        <option value="Pathanamthitta">Pathanamthitta</option>
+                        <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+
+                        </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+
+                             <br>
+                        <label class="label" for="city">Branch:</label>
+                            <div class="rs-select2 js-select-simple select&#45;&#45;no-search">
+                        <select id="city">
+                        </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <label class="label" for="purpose">Account type:</label>
+<!--                            <div class="rs-select2 js-select-simple select&#45;&#45;no-search">-->
+                        <select name="purpose" id="purpose">
+                            <option class="label" value="">select</option>
+                            <option class="label" value="ForEnquiry">Savings Account</option>
+                        <option class="label" value="PlaceOrder">Current Account</option>
+
+                        </select>
+<!--                                <div class="select-dropdown"></div>-->
+<!--                            </div>-->
+                            <br>
+                            <br>
+
+                        <label class="label">Materials provide:</label>
+
+                        <input type="checkbox" id="matrls" name="matrl1" value="Debit card">
+                        <label for="matrls"> Debit card</label><br>
+                        <input type="checkbox" id="matrls1" name="matrl2" value="Credit card">
+                        <label for="matrls1">  Credit card</label><br>
+                        <input type="checkbox" id="matrsl2" name="matrl2" value="cheque book">
+                        <label for="matrsl2">cheque book</label><br><br>
+
+
+                        <div class="p-t-15">
+                            <button  class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% for msg in messages %}
+    <h2>{{msg}}</h2>
+    {% endfor %}
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'assets/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'js/global.js' %}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
